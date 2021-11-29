@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Tabs from "./navigation/tabs/tab";
+import Tabs from "./navigation/tabs/MainTab";
 
 export default function App() {
   return (
