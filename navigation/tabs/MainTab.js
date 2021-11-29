@@ -8,11 +8,11 @@ import FontIcon from 'react-native-vector-icons/FontAwesome5'
 import { colors } from '../../theme'
 
 
-const Tab = createBottomTabNavigator();
+const MainTab = createBottomTabNavigator();
 
 const Tabs = () => {
     return (
-        <Tab.Navigator
+        <MainTab.Navigator
             screenOptions={({ route }) => ({
                 // eslint-disable-next-line react/prop-types
                 tabBarIcon: ({ focused }) => {
@@ -60,10 +60,10 @@ const Tabs = () => {
                 }
             }}
         >
-            <Tab.Screen name="Find" component={FindScreen} />
-            <Tab.Screen name="Add" component={AddAdvertisementScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
-        </Tab.Navigator>
+            <MainTab.Screen name="Find" component={FindScreen} />
+            <MainTab.Screen name="Add" component={AddAdvertisementScreen} />
+            <MainTab.Screen name="Profile" component={ProfileScreen} />
+        </MainTab.Navigator>
     );
 }
 

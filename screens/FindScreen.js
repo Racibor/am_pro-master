@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
+import {StatusBar} from "expo-status-bar";
 
 const FindScreen = ( {navigation} ) => {
     return (
@@ -16,6 +17,6 @@ const styles = StyleSheet.create({
        flex: 1,
        alignItems: 'center',
        justifyContent: 'center',
-       backgroundColor: '#8fcbbc',
+       backgroundColor: '#9e8acb',
    }
 });
