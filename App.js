@@ -35,8 +35,8 @@ function AuctionListScreen() {
 
     const [auction, setAuction] = React.useState([]);
 
-    const addAuction = () => {
-        setAuction([...auction, "Temp"]);
+    const addAuction = (text) => {
+        setAuction([...auction, text]);
     }
 
     const delAuction = () =>{
@@ -45,17 +45,24 @@ function AuctionListScreen() {
         setAuction([...tempAuction]);
     }
 
+    const delTouchedAuction = (index) => {
+        let tempAuction = auction;
+        tempAuction.splice(index, 1);
+        setAuction([...tempAuction]);
+    }
+
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Auction Screen</Text>
-            <Button title="Add test auction" onPress={addAuction} />
+            <Button title="Add test auction" onPress={() => { addAuction("Component nr. "+auction.length) }} />
             <Button title="Delete last auction" onPress={delAuction} />
 
             <AuctionComponent title="Tu bedzie tytul" desc="A tutaj bedzie opis" />
             <ScrollView>
             {
-                    auction.map((a) => {
-                        return (<AuctionComponent title={a} desc = "TempDesc" />) })
+                    auction.map((a,index) => {
+                        return (<AuctionComponent title={a} desc="TempDesc" method={(index) => { delTouchedAuction(index) }} />)
+                    })
             }
             </ScrollView>
         </View>
@@ -65,7 +72,7 @@ function AuctionListScreen() {
 const AuctionComponent = (props) =>{
     return (
         <View style={styles.auction}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.method}>
                 <Text style={{ fontSize: 15, color: '#555' }}>{"***********************************************"}</Text>
                 <Text style={{ fontSize: 15, color: '#fff' }}>{props.title}</Text>
                 <Text style={{ fontSize: 10, color: '#fff' }}>{props.desc}</Text>
@@ -107,5 +114,6 @@ const styles = StyleSheet.create({
         alignItems: 'left',
         justifyContent: 'space-between',
         marginTop: 20,
+        
     },
 });
