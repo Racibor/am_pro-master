@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Button} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import StackNavigationProfile from "../navigation/stacks/StackProfile";
+import Drawer from "../navigation/drawers/Drawer";
 
 // function HomeScreen({navigation}) {
 //     return (

@@ -4,15 +4,13 @@ import {StatusBar} from "expo-status-bar";
 import Drawer from "../navigation/drawers/Drawer";
 import Tabs from "../navigation/tabs/MainTab";
 
-const FindScreen = ( {navigation} ) => {
+const Home = ( {navigation} ) => {
     return (
-        <View  style = {styles.container}>
-            <Text>Find Screen</Text>
-        </View>
+        <Tabs/>
     );
 }
 
-export default FindScreen;
+export default Home;
 
 const styles = StyleSheet.create({
    container: {
