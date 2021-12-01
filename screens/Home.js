@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import Drawer from "../navigation/drawers/Drawer";
