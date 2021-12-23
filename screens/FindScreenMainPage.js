@@ -15,7 +15,7 @@ const FindScreenMainPage = ( {navigation} ) => {
             <FlatList
                 data={advertisements}
                 renderItem={ ({item}) => (
-                    <TouchableOpacity onPress={() => navigation.navigate('AdvertisementDetails', item)}>
+                    <TouchableOpacity onPress={() => navigation.push('AdvertisementDetails', item)}>
                         <AdvertisementCard>
                             <Text>{item.title}</Text>
                             <Text>{item.price}</Text>

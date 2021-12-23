@@ -2,13 +2,16 @@ import {StyleSheet} from "react-native";
 import {View, Text} from 'react-native';
 import React from 'react';
 
-export default function AdvertisementDetails({navigation}){
+export default function AdvertisementDetails({route}){
+
+    let data = route.params;
+
     return (
         <View style={styles.container}>
             <Text>Details of Advertisement</Text>
-            {/*<Text>{ navigation.getParam('title')}</Text>*/}
-            {/*<Text>{ navigation.getParam('description')}</Text>*/}
-            {/*<Text>{ navigation.getParam('price')}</Text>*/}
+            <Text>{ data.title }</Text>
+            <Text>{ data.description }</Text>
+            <Text>{ data.price }</Text>
         </View>
     )
 }
