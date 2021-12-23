@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity, StatusBar} from "react-native";
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import AdvertisementCard from "../components/advertisementCard";
 
 const FindScreenMainPage = ( {navigation} ) => {
@@ -8,7 +8,6 @@ const FindScreenMainPage = ( {navigation} ) => {
         {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1'},
         {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2'}
     ]);
-
 
     return (
         <View style={styles.container}>

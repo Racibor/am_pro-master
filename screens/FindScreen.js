@@ -1,7 +1,7 @@
 import React from 'react';
 import StackNavigationAdvertisement from "../navigation/stacks/StackAdvertisement";
 
-const ProfileScreen = ( {navigation} ) => {
+const ProfileScreen = () => {
     return (
         <StackNavigationAdvertisement />
     );

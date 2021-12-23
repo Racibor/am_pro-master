@@ -5,7 +5,7 @@ import AdvertisementDetails from "../../screens/AdvertisementDetails";
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigationAdvertisement = ( {navigation} ) => {
+const StackNavigationAdvertisement = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen options={{headerShown: false}} name="FindScreenMainPage" component={FindScreenMainPage} />

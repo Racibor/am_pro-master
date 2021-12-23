@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from "react-native";
 
-const AddAdvertisementScreen = ( {navigation} ) => {
+const AddAdvertisementScreen = () => {
     return (
         <View  style = {styles.container}>
             <Text>AddAdvertisement Screen</Text>

@@ -6,9 +6,6 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer'
 import DrawerMenu from './DrawerMenu'
-import FindScreen from '../../screens/FindScreen'
-import ProfileScreen from '../../screens/ProfileScreen'
-import Tabs from "../tabs/MainTab";
 import Home from "../../screens/Home"
 import axios from 'axios';
 
