@@ -1,13 +1,29 @@
-import React from 'react';
-import {View, Text, StyleSheet} from "react-native";
-import {StatusBar} from "expo-status-bar";
-import Drawer from "../navigation/drawers/Drawer";
-import Tabs from "../navigation/tabs/MainTab";
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
+import AdvertisementCard from "../components/advertisementCard";
+
 
 const FindScreen = ( {navigation} ) => {
+
+    const [advertisements, setAdvertisement] = useState([
+        {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1'},
+        {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2'}
+    ]);
+
+
     return (
-        <View  style = {styles.container}>
-            <Text>Find Screen</Text>
+        <View style={styles.container}>
+            <FlatList
+                data={advertisements}
+                renderItem={ ({item}) => (
+                     <TouchableOpacity>
+                         <AdvertisementCard>
+                            <Text>{item.title}</Text>
+                            <Text>{item.price}</Text>
+                         </AdvertisementCard>
+                    </TouchableOpacity>
+                )}
+            />
         </View>
     );
 }
