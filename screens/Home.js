@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from "react-native";
-import {StatusBar} from "expo-status-bar";
-import Drawer from "../navigation/drawers/Drawer";
+import React from 'react';
+import {StyleSheet} from "react-native";
 import Tabs from "../navigation/tabs/MainTab";
 
-const Home = ( {navigation} ) => {
+const Home = () => {
     return (
         <Tabs/>
     );

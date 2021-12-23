@@ -1,24 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet} from "react-native";
-import {StatusBar} from "expo-status-bar";
-import Drawer from "../navigation/drawers/Drawer";
-import Tabs from "../navigation/tabs/MainTab";
+import StackNavigationAdvertisement from "../navigation/stacks/StackAdvertisement";
 
-const FindScreen = ( {navigation} ) => {
+const ProfileScreen = () => {
     return (
-        <View  style = {styles.container}>
-            <Text>Find Screen</Text>
-        </View>
+        <StackNavigationAdvertisement />
     );
 }
 
-export default FindScreen;
-
-const styles = StyleSheet.create({
-   container: {
-       flex: 1,
-       alignItems: 'center',
-       justifyContent: 'center',
-       backgroundColor: '#9e8acb',
-   }
-});
+export default ProfileScreen;

@@ -5,7 +5,7 @@ import ProfileDetails from "../../screens/ProfileDetails";
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigationProfile = ( {navigation} ) => {
+const StackNavigationProfile = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={Profile} />
