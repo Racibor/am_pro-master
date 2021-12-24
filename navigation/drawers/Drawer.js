@@ -21,7 +21,7 @@ const DrawerMenuContainer = (props) => {
       <DrawerItemList state={newState} {...rest} />
         {
            props.categories.map(e =>
-                (<DrawerItem label={e}/>))
+                (<DrawerItem label={e['name']}/>))
         }
     </DrawerContentScrollView>
   )
@@ -31,16 +31,15 @@ const DrawerNavigator = (props) => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get('http://192.168.1.24:8080/all')
-                    .then(function (res) {
-                      let tempCategories = res.data.map(e => {
-                          return e['name'];
-                      });
-                      setCategories(tempCategories);
-                    }).catch(function (err) {
-                      setCategories(['test']);
-                    });
-    }, [])
+        axios
+            .get('http://10.0.2.2:8080/api/category')
+            .then(function (res) {
+                setCategories(res.data);
+            }).catch(function (err) {
+                console.warn("Error Error Error");
+            });
+    }, []);
+
     var cat = {categories}
     return(
     <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <DrawerMenuContainer{...cat}{...props}/>}>

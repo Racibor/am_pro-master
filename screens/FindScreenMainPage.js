@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button} from "react-native";
 import AdvertisementCard from "../components/advertisementCard";
+import axios from "axios";
 
 const FindScreenMainPage = ( {navigation} ) => {
 
@@ -8,6 +9,17 @@ const FindScreenMainPage = ( {navigation} ) => {
         {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1'},
         {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2'}
     ]);
+
+    useEffect( () => {
+        axios.get(
+            'http://10.0.2.2:8080/api/advertisement'
+        ).then( (response) => {
+            console.log("Pobrano dane!");
+            setAdvertisement(response.data);
+        }).catch( (error) => {
+            console.log("Wykryto blad!");
+        });
+    }, []);
 
     return (
         <View style={styles.container}>
