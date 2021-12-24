@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button} from "react-native";
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image} from "react-native";
 import AdvertisementCard from "../components/advertisementCard";
 import axios from "axios";
 
 const FindScreenMainPage = ( {navigation} ) => {
 
     const [advertisements, setAdvertisement] = useState([
-        {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1'},
-        {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2'}
+        {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1', base64Image: null},
+        {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2', base64Image: null}
     ]);
 
     useEffect( () => {
@@ -28,6 +28,7 @@ const FindScreenMainPage = ( {navigation} ) => {
                 renderItem={ ({item}) => (
                     <TouchableOpacity onPress={() => navigation.push('AdvertisementDetails', item)}>
                         <AdvertisementCard>
+                            <Image style={{width: 50, height: 50}} source={{uri: 'data:image/png;base64,' + item.base64Image}} />
                             <Text>{item.title}</Text>
                             <Text>{item.price}</Text>
                         </AdvertisementCard>
