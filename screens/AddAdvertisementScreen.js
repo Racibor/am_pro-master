@@ -1,5 +1,5 @@
 import React, {Component, useRef} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native'
 import Camera from "../sensors/Camera";
 import CameraComponent from "../sensors/Camera";
 
@@ -9,7 +9,7 @@ class AddAdvertisementScreen extends Component{
 
         return (
             <View style={styles.container}>
-                <CameraComponent />
+                <Button title="Take photo" />
             </View>
         )
 

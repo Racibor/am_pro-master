@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Button} from "react-native";
 import {StatusBar} from "expo-status-bar";
 
-const ProfileMainPage = ( {navigation} ) => {
+const Profile = ({navigation} ) => {
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>
@@ -15,7 +15,7 @@ const ProfileMainPage = ( {navigation} ) => {
     );
 }
 
-export default ProfileMainPage;
+export default Profile;
 
 const styles = StyleSheet.create({
     container: {
