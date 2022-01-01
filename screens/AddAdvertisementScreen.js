@@ -21,6 +21,10 @@ const AddAdvertisementScreen = ({navigation}) => {
         axios.post('http://10.0.2.2:8080/api/advertisements', advertisementRequestObj)
             .then( response => {
                 console.log(response);
+
+                onChangeTextTitle("");
+                onChangeTextDescription("");
+                onChangePrice("");
             });
     };
 

@@ -11,7 +11,7 @@ const FindScreen = ({navigation} ) => {
     ]);
 
     useEffect( () => {
-        navigation.addListener('focus', async () => {
+        navigation.addListener('focus', () => {
             axios.get(
                 'http://10.0.2.2:8080/api/advertisements'
             ).then( (response) => {
