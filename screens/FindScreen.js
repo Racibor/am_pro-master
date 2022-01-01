@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image} from 
 import AdvertisementCard from "../components/advertisementCard";
 import axios from "axios";
 
-const FindScreenMainPage = ( {navigation} ) => {
+const FindScreen = ({navigation} ) => {
 
     const [advertisements, setAdvertisement] = useState([
         {title: 'Samolot', price:'1000 PLN', description: 'Jest bardzo duży!', key: '1', base64Image: null},
@@ -11,14 +11,16 @@ const FindScreenMainPage = ( {navigation} ) => {
     ]);
 
     useEffect( () => {
-        axios.get(
-            'http://10.0.2.2:8080/api/advertisement'
-        ).then( (response) => {
-            console.log("Pobrano dane!");
-            setAdvertisement(response.data);
-        }).catch( (error) => {
-            console.log("Wykryto blad!");
-        });
+        navigation.addListener('focus', async () => {
+            axios.get(
+                'http://10.0.2.2:8080/api/advertisements'
+            ).then( (response) => {
+                console.log("Pobrano dane z GET!");
+                setAdvertisement(response.data);
+            }).catch( (error) => {
+                console.log("Wykryto blad!");
+            });
+        })
     }, []);
 
     return (
@@ -39,7 +41,7 @@ const FindScreenMainPage = ( {navigation} ) => {
     );
 }
 
-export default FindScreenMainPage;
+export default FindScreen;
 
 const styles = StyleSheet.create({
     container: {

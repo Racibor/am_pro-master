@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import AddAdvertisementScreen from '../../screens/AddAdvertisementScreen'
 import FontIcon from 'react-native-vector-icons/FontAwesome5'
 import { colors } from '../../theme'
 import StackNavigationProfile from "../stacks/StackProfile";
 import StackNavigationAdvertisement from "../stacks/StackAdvertisement";
+import StackCamera from "../stacks/StackCamera";
 
 const MainTab = createBottomTabNavigator();
 
@@ -60,7 +60,7 @@ const Tabs = () => {
             }}
         >
             <MainTab.Screen name="Find" component={StackNavigationAdvertisement} />
-            <MainTab.Screen name="Add" component={AddAdvertisementScreen} />
+            <MainTab.Screen name="Add" component={StackCamera} />
             <MainTab.Screen name="Profile" component={StackNavigationProfile} />
         </MainTab.Navigator>
     );
