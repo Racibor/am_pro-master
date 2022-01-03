@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Button, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, Button, TextInput, Picker} from 'react-native';
 import axios from "axios";
 
 const AddAdvertisementScreen = ({navigation}) => {
@@ -8,14 +8,37 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [description, onChangeTextDescription] = React.useState("");
     const [price, onChangePrice] = React.useState("");
     const [img, onChangeImg] = useState(null);
+    const [selectedValue, setSelectedValue] = useState(null);
 
+    const [categories, setCategories] = useState([
+        {name: 'Odzieź', key: '1'},
+        {name: 'Biologia', key: '2'}
+    ]);
 
-    const createAdvert = (title, desc, price, img) => {
+    const categoryItems = categories.map( (item) => {
+        return <Picker.Item key={item.key} value={item.name} label={item.name}/>
+    })
+
+    useEffect( () => {
+        navigation.addListener('focus', () => {
+            axios.get(
+                'http://10.0.2.2:8080/api/categories'
+            ).then( (response) => {
+                console.log("Pobrano kategorie z GET!");
+                setCategories(response.data);
+            }).catch( (error) => {
+                console.log("Wykryto blad (ladowanie kategorii)!");
+            });
+        })
+    }, []);
+
+    const createAdvert = (title, desc, price, category, img) => {
         let advertisementRequestObj = {
             key: null,
             title: title,
             description: desc,
             price: price,
+            category: category,
             base64Image: img
         }
         axios.post('http://10.0.2.2:8080/api/advertisements', advertisementRequestObj)
@@ -58,9 +81,18 @@ const AddAdvertisementScreen = ({navigation}) => {
                 keyboardType="numeric"
             />
 
+
+            <Picker
+                selectedValue={selectedValue}
+                style={{ height: 50, width: 150 }}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+            >
+                {categoryItems}
+            </Picker>
+
             <Button
                 title="Create Advertisement"
-                onPress={() => createAdvert(title, description, price, img)}
+                onPress={() => createAdvert(title, description, price, selectedValue, img)}
             />
 
         </View>
