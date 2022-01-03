@@ -21,22 +21,22 @@ const DrawerMenuContainer = (props) => {
       <DrawerItemList state={newState} {...rest} />
         {
            props.categories.map(e =>
-                (<DrawerItem label={e['name']}/>))
+                (<DrawerItem key={e['key']} label={e['name']}/>))
         }
     </DrawerContentScrollView>
   )
 }
 
-const DrawerNavigator = (props) => {
+const DrawerNavigator = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         axios
-            .get('http://10.0.2.2:8080/api/category')
+            .get('http://10.0.2.2:8080/api/categories')
             .then(function (res) {
                 setCategories(res.data);
             }).catch(function (err) {
-                console.warn("Error Error Error");
+                console.warn("Wykryto błąd (ładowanie drawera)");
             });
     }, []);
 
