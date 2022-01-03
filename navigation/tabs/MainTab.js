@@ -13,7 +13,6 @@ const Tabs = () => {
     return (
         <MainTab.Navigator
             screenOptions={({ route }) => ({
-                // eslint-disable-next-line react/prop-types
                 tabBarIcon: ({ focused }) => {
                     switch (route.name) {
                         case 'Find':
@@ -51,11 +50,15 @@ const Tabs = () => {
             })}
             tabBarOptions={{
                 showLabel: true,
-                style: {
-
-                },
                 labelStyle: {
+                    color: "black",
                     fontSize: 12,
+                    tabBarStyle: [
+                        {
+                            display: "flex"
+                        },
+                        null
+                    ]
                 }
             }}
         >
