@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image} from "react-native";
-import AdvertisementCard from "../components/advertisementCard";
+import AdvertisementCard from "../components/AdvertisementCard";
 import axios from "axios";
+import SearchBar from "../components/SeachBar";
 
 const FindScreen = ({navigation} ) => {
 
@@ -10,6 +11,11 @@ const FindScreen = ({navigation} ) => {
         {title: 'Kanapka', price:'20 PLN', description: 'Jest bardzo dobra!', key: '2', category: 'Motoryzacja', base64Image: null}
     ]);
 
+    const [advertisementsFiltered, setAdvertisementsFiltered] = useState([]);
+
+    const [searchPhrase, setSearchPhrase] = useState("");
+    const [clicked, setClicked] = useState(false);
+
     useEffect( () => {
         navigation.addListener('focus', () => {
             axios.get(
@@ -17,16 +23,29 @@ const FindScreen = ({navigation} ) => {
             ).then( (response) => {
                 console.log("Pobrano ogloszenia z GET!");
                 setAdvertisement(response.data);
+                setAdvertisementsFiltered(response.data);
             }).catch( (error) => {
                 console.log("Wykryto blad (ladowanie ogloszen)!");
             });
         })
     }, []);
 
+
+    useEffect( () => {
+        const resultArray = advertisements.filter( advertisement => advertisement.title.indexOf(searchPhrase) > -1);
+        setAdvertisementsFiltered(resultArray);
+    }, [searchPhrase]);
+
     return (
         <View style={styles.container}>
+            <SearchBar
+                searchPhrase={searchPhrase}
+                setSearchPhrase={setSearchPhrase}
+                clicked={clicked}
+                setClicked={setClicked}
+            />
             <FlatList
-                data={advertisements}
+                data={advertisementsFiltered}
                 renderItem={ ({item}) => (
                     <TouchableOpacity onPress={() => navigation.push('AdvertisementDetails', item)}>
                         <AdvertisementCard>
