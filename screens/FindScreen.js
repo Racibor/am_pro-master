@@ -32,9 +32,12 @@ const FindScreen = ({navigation} ) => {
 
 
     useEffect( () => {
-        const resultArray = advertisements.filter( advertisement => advertisement.title.indexOf(searchPhrase) > -1);
+        const resultArray = advertisements.filter( advertisement =>
+            advertisement.title.indexOf(searchPhrase) > -1 || advertisement.category.indexOf(searchPhrase) > -1);
         setAdvertisementsFiltered(resultArray);
     }, [searchPhrase]);
+
+    useEffect( () => setSearchPhrase(""), [clicked]);
 
     return (
         <View style={styles.container}>
