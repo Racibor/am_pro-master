@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image, ImageBackground} from "react-native";
+import {Pressable,View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image, ImageBackground} from "react-native";
 import AdvertisementCard from "../components/AdvertisementCard";
 import axios from "axios";
 import SearchBar from "../components/SeachBar";
@@ -53,14 +53,14 @@ const FindScreen = ({navigation} ) => {
             <FlatList
                 data={advertisementsFiltered}
                 renderItem={ ({item}) => (
-                    <TouchableOpacity onPress={() => navigation.push('AdvertisementDetails', item)}>
+                    <Pressable onPress={() => navigation.push('AdvertisementDetails', item)}>
                         <AdvertisementCard>
                             <Image style={styles.advertImage} source={{uri: 'data:image/png;base64,' + item.base64Image}} />
                             <Text style = {{fontSize: 25 , fontWeight: 'bold'}} >{item.title}</Text>
-                            <Text>{item.price}zł</Text>
+                            <Text>{item.price} PLN</Text>
                             <Text>{item.category}</Text>
                         </AdvertisementCard>
-                    </TouchableOpacity>
+                    </Pressable>
                 )}
             />
             </ImageBackground>
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#9e8acb',
+        backgroundColor: '#111',
     }
 });
