@@ -1,9 +1,9 @@
 import {StyleSheet} from "react-native";
-import {View, Text, Image, ScrollView,SafeAreaView} from 'react-native';
+import {StatusBar,View, Text, Image, ScrollView,SafeAreaView} from 'react-native';
 import React from 'react';
 
-export default function AdvertisementDetails({route}){
-
+//export default function AdvertisementDetails({route}){
+const AdvertisementDetails = ({route,navigation} ) => {
     let data = route.params;
 
     return (
@@ -17,9 +17,11 @@ export default function AdvertisementDetails({route}){
                 <Text>{ data.description }</Text>
                 </View>
             </ScrollView>
+            <StatusBar style="auto" />
         </SafeAreaView>
     )
 }
+export default AdvertisementDetails;
 
 const styles = StyleSheet.create({
     advertImage: {

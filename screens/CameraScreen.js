@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 
 export default function CameraScreen() {
@@ -36,6 +36,7 @@ export default function CameraScreen() {
                     </TouchableOpacity>
                 </View>
             </Camera>
+            <StatusBar style="auto" />
         </View>
     );
 }
