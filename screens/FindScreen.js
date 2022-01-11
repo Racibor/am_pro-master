@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image} from "react-native";
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, Image, ImageBackground} from "react-native";
 import AdvertisementCard from "../components/AdvertisementCard";
 import axios from "axios";
 import SearchBar from "../components/SeachBar";
+
+const image = { uri: "https://media-cdn.tripadvisor.com/media/photo-s/0d/87/0c/0c/multi-level-shopping.jpg" };
 
 const FindScreen = ({navigation} ) => {
 
@@ -41,6 +43,7 @@ const FindScreen = ({navigation} ) => {
 
     return (
         <View style={styles.container}>
+        <ImageBackground source={image} blurRadius={2} resizeMode="cover" style={{flex: 1, justifyContent: "center",}}>
             <SearchBar
                 searchPhrase={searchPhrase}
                 setSearchPhrase={setSearchPhrase}
@@ -52,14 +55,15 @@ const FindScreen = ({navigation} ) => {
                 renderItem={ ({item}) => (
                     <TouchableOpacity onPress={() => navigation.push('AdvertisementDetails', item)}>
                         <AdvertisementCard>
-                            <Image style={{width: 50, height: 50}} source={{uri: 'data:image/png;base64,' + item.base64Image}} />
-                            <Text>{item.title}</Text>
-                            <Text>{item.price}</Text>
+                            <Image style={styles.advertImage} source={{uri: 'data:image/png;base64,' + item.base64Image}} />
+                            <Text style = {{fontSize: 25 , fontWeight: 'bold'}} >{item.title}</Text>
+                            <Text>{item.price}zł</Text>
                             <Text>{item.category}</Text>
                         </AdvertisementCard>
                     </TouchableOpacity>
                 )}
             />
+            </ImageBackground>
         </View>
     );
 }
@@ -67,6 +71,12 @@ const FindScreen = ({navigation} ) => {
 export default FindScreen;
 
 const styles = StyleSheet.create({
+
+    advertImage: {
+        flex:1,
+        aspectRatio: 1.5,
+        resizeMode: 'cover'
+    },
     container: {
         flex: 1,
         alignItems: 'center',
