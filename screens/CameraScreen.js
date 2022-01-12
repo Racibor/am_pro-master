@@ -30,6 +30,7 @@ export default function CameraScreen() {
                         if (this.camera) {
                             let photo = await this.camera.takePictureAsync();
                             console.log(photo);
+
                         }
                     }} style={styles.capture}>
                         <Text style={{ fontSize: 14 }}> SNAP </Text>

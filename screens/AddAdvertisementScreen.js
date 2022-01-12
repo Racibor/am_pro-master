@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Button, TextInput, Picker} from 'react-native';
+import {Text,View, StyleSheet, TextInput, Picker,ImageBackground,ScrollView} from 'react-native';
+import { Input, Center, NativeBaseProvider,Button } from "native-base";
 import axios from "axios";
+
+const image = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
+
 
 const AddAdvertisementScreen = ({navigation}) => {
 
@@ -53,49 +57,71 @@ const AddAdvertisementScreen = ({navigation}) => {
 
 
     return (
+    <NativeBaseProvider>
         <View style={styles.container}>
-            <Button
-                title="Take photo"
-                onPress={() => navigation.navigate("CameraScreen")}
-            />
+        <ImageBackground source={image} blurRadius={2} resizeMode="cover" style={{flex: 1, justifyContent: "center",}}>
+            <Text style={[styles.text,{fontSize:30,fontWeight:'bold',marginBottom:30}]}>{"Add new advertisement"}</Text>
+            <ScrollView>
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={styles.text}>{"Describe your item with picture:"}</Text>
+            <Button style={{marginHorizontal:10, marginBottom:5}} onPress={() => navigation.navigate("CameraScreen")}>
+            Take photo
+            </Button>
+            </View>
 
-            <TextInput
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={styles.text}>Name of your auction:</Text>
+            <Input
                 style={styles.input}
                 value={title}
                 onChangeText={onChangeTextTitle}
                 placeholder="Title"
             />
+            </View>
 
-            <TextInput
-                style={styles.input}
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={styles.text}>Describe your product (Optional):</Text>
+            <Input
+                style={[styles.input,{height:100}]}
                 value={description}
                 onChangeText={onChangeTextDescription}
                 placeholder="Description"
             />
+            </View>
 
-            <TextInput
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={styles.text}>How much does it cost?:</Text>
+            <Input
                 style={styles.input}
                 value={price}
                 onChangeText={onChangePrice}
                 placeholder="Price"
                 keyboardType="numeric"
             />
+            </View>
 
-
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={styles.text}>In which category should it be?:</Text>
             <Picker
                 selectedValue={selectedValue}
-                style={{ height: 50, width: 150 }}
+                style={{ height: 50, width: 150}}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
             >
                 {categoryItems}
             </Picker>
+            </View>
 
             <Button
-                title="Create Advertisement"
+                style={{height:70,marginHorizontal:20,marginVertical:10}}
                 onPress={() => createAdvert(title, description, price, selectedValue, img)}
-            />
+            >
+            Create Advertisement
+            </Button>
 
+            </ScrollView>
+        </ImageBackground>
         </View>
+        </NativeBaseProvider>
     );
 }
 
@@ -105,16 +131,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: '#8ac24a',
     },
     input: {
         backgroundColor: 'white',
         height: 40,
-        margin: 12,
+        marginHorizontal: 12,
+        marginBottom: 12,
         borderWidth: 1,
         padding: 10,
-        width: '50%',
     },
+    text: {
+        color: '#eee',
+        fontSize: 17,
+        marginLeft: 12,
+    }
 });
