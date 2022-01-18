@@ -38,6 +38,7 @@ const FindScreen = ({navigation} ) => {
 
 
     useEffect( () => {
+        //TODO poprawic żeby też mala litera była brana pod uwagę
         const resultArray = advertisements.filter( advertisement =>
             advertisement.title.indexOf(searchPhrase) > -1 || advertisement.category.indexOf(searchPhrase) > -1);
         setAdvertisementsFiltered(resultArray);
