@@ -32,7 +32,7 @@ const DrawerNavigator = () => {
 
     useEffect(() => {
         axios
-            .get('http://10.0.2.2:8080/api/categories')
+            .get('http://80.211.251.152:8080/api/categories')
             .then(function (res) {
                 setCategories(res.data);
             }).catch(function (err) {

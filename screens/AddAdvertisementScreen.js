@@ -26,7 +26,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     useEffect( () => {
         navigation.addListener('focus', () => {
             axios.get(
-                'http://10.0.2.2:8080/api/categories'
+                'http://80.211.251.152:8080/api/categories'
             ).then( (response) => {
                 console.log("Pobrano kategorie z GET!");
                 setCategories(response.data);
@@ -45,7 +45,7 @@ const AddAdvertisementScreen = ({navigation}) => {
             category: category,
             base64Image: img
         }
-        axios.post('http://10.0.2.2:8080/api/advertisements', advertisementRequestObj)
+        axios.post('http://80.211.251.152:8080/api/advertisements', advertisementRequestObj)
             .then( response => {
                 console.log(response);
 

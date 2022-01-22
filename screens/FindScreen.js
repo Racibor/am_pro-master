@@ -25,7 +25,7 @@ const FindScreen = ({navigation} ) => {
     useEffect( () => {
         navigation.addListener('focus', () => {
             axios.get(
-                'http://10.0.2.2:8080/api/advertisements'
+                'http://80.211.251.152:8080/api/advertisements'
             ).then( (response) => {
                 console.log("Pobrano ogloszenia z GET!");
                 setAdvertisement(response.data);
