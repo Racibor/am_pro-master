@@ -8,6 +8,7 @@ import {
 import DrawerMenu from './DrawerMenu'
 import Home from "../../screens/Home"
 import axios from 'axios';
+import StackNavigationAdvertisement from "../stacks/StackAdvertisement";
 
 const Drawer = createDrawerNavigator()
 
@@ -28,7 +29,7 @@ const DrawerMenuContainer = (props) => {
 }
 
 const DrawerNavigator = () => {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([{key: 0, name: 't'}]);
 
     useEffect(() => {
         axios
@@ -41,10 +42,18 @@ const DrawerNavigator = () => {
     }, []);
 
     var cat = {categories}
-    return(
-    <Drawer.Navigator initialRouteName="Home" drawerContent={(props) => <DrawerMenuContainer{...cat}{...props}/>}>
-        <Drawer.Screen name="Home" component={Home} />
+    /*return(
+    <Drawer.Navigator drawerContent={(props) => <DrawerMenuContainer{...cat}{...props}/>}>
+        <Drawer.Screen name="Find" component={FindScreen} />
     </Drawer.Navigator>
-    )
+    )*/
+    return(
+        <Drawer.Navigator>
+            {
+                categories.map(e =>
+                                (<Drawer.Screen name={e['name']} component={StackNavigationAdvertisement}{...e['name']}/>))
+            }
+        </Drawer.Navigator>
+        )
  }
 export default DrawerNavigator
