@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Text,View, StyleSheet, TextInput, Picker,ImageBackground,ScrollView} from 'react-native';
-import { Input, Center, NativeBaseProvider,Button } from "native-base";
+import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView} from 'react-native';
+import { Input, NativeBaseProvider,Button } from "native-base";
 import axios from "axios";
 
 const image = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
@@ -60,7 +60,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     <NativeBaseProvider>
         <View style={styles.container}>
         <ImageBackground source={image} blurRadius={2} resizeMode="cover" style={{flex: 1, justifyContent: "center",}}>
-            <Text style={[styles.text,{fontSize:30,fontWeight:'bold',marginBottom:30}]}>{"Add new advertisement"}</Text>
+            <Text style={[styles.text,{fontSize:30,fontWeight:'bold',marginBottom:20, marginTop:50, textAlign: 'center' }]}>{"Add new advertisement"}</Text>
             <ScrollView>
             <View style={{backgroundColor:'#444' , margin:5 }}>
             <Text style={styles.text}>{"Describe your item with picture:"}</Text>
