@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView} from 'react-native';
+import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'react-native';
 import { Input, NativeBaseProvider,Button } from "native-base";
 import axios from "axios";
+import * as FileSystem from 'expo-file-system';
 
-const image = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
-
+const backgroundImage = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
+global.tempImage = "empty";
 
 const AddAdvertisementScreen = ({navigation}) => {
 
@@ -38,6 +39,7 @@ const AddAdvertisementScreen = ({navigation}) => {
 
     const createAdvert = (title, desc, price, category, img) => {
         let advertisementRequestObj = {
+            user: "knaga",
             key: null,
             title: title,
             description: desc,
@@ -59,11 +61,12 @@ const AddAdvertisementScreen = ({navigation}) => {
     return (
     <NativeBaseProvider>
         <View style={styles.container}>
-        <ImageBackground source={image} blurRadius={2} resizeMode="cover" style={{flex: 1, justifyContent: "center",}}>
+        <ImageBackground source={backgroundImage} blurRadius={2} resizeMode="cover" style={{flex: 1, justifyContent: "center",}}>
             <Text style={[styles.text,{fontSize:30,fontWeight:'bold',marginBottom:20, marginTop:50, textAlign: 'center' }]}>{"Add new advertisement"}</Text>
             <ScrollView>
             <View style={{backgroundColor:'#444' , margin:5 }}>
             <Text style={styles.text}>{"Describe your item with picture:"}</Text>
+            <Image style={(global.tempImage == "empty")?"":styles.advertImage} source ={{uri: global.tempImage}}/>
             <Button style={{marginHorizontal:10, marginBottom:5}} onPress={() => navigation.navigate("CameraScreen")}>
             Take photo
             </Button>
@@ -113,7 +116,11 @@ const AddAdvertisementScreen = ({navigation}) => {
 
             <Button
                 style={{height:70,marginHorizontal:20,marginVertical:10}}
-                onPress={() => createAdvert(title, description, price, selectedValue, img)}
+                onPress={async () => {
+                const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
+                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)});
+                console.log(temp.length);
+                }}
             >
             Create Advertisement
             </Button>
@@ -147,5 +154,11 @@ const styles = StyleSheet.create({
         color: '#eee',
         fontSize: 17,
         marginLeft: 12,
-    }
+    },
+        advertImage: {
+            flex:1,
+            aspectRatio: 1.5,
+            marginHorizontal:10,
+            resizeMode: 'cover'
+        },
 });

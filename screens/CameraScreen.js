@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 
-export default function CameraScreen() {
+export default function CameraScreen({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
 
@@ -28,9 +28,10 @@ export default function CameraScreen() {
                 <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
                     <TouchableOpacity onPress={async () => {
                         if (this.camera) {
-                            let photo = await this.camera.takePictureAsync();
+                            let photo = await this.camera.takePictureAsync({quality: 0.2,});
                             console.log(photo);
-
+                            global.tempImage = photo.uri;
+                            navigation.goBack();
                         }
                     }} style={styles.capture}>
                         <Text style={{ fontSize: 14 }}> SNAP </Text>

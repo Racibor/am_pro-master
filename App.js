@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Tabs from "./navigation/tabs/MainTab";
 import Drawer from "./navigation/drawers/Drawer";
 import Home from "./screens/Home";
+import ImgToBase64 from 'react-native-image-base64';
 
 export default function App() {
   return (
