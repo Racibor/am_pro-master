@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontIcon from 'react-native-vector-icons/FontAwesome5'
 import { colors } from '../../theme'
 import StackNavigationProfile from "../stacks/StackProfile";
-import StackNavigationAdvertisement from "../stacks/StackAdvertisement";
 import StackCamera from "../stacks/StackCamera";
+import Drawer from "../drawers/Drawer";
 
 const MainTab = createBottomTabNavigator();
 
@@ -62,7 +62,7 @@ const Tabs = () => {
                 }
             }}
         >
-            <MainTab.Screen name="Find" component={StackNavigationAdvertisement} />
+            <MainTab.Screen name="Drawer" component={Drawer} />
             <MainTab.Screen name="Add" component={StackCamera} />
             <MainTab.Screen name="Profile" component={StackNavigationProfile} />
         </MainTab.Navigator>
