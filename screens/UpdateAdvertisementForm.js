@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
-import {Center, Input, VStack} from "native-base";
+import {Button, Center, Input, Stack, TextArea, VStack} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 
 const UpdateAdvertisementForm = ({route}) => {
     let data = route.params;
-    const [title, onChangeTextTitle] = React.useState(data.title);
-    // const [description, onChangeTextDescription] = React.useState("");
-    const [price, onChangePrice] = React.useState(data.price);
+    console.log(data.description);
+    const [title, onChangeTextTitle] = useState(data.title);
+    const [description, onChangeTextDescription] = React.useState(data.description);
+    const [price, onChangePrice] = useState(data.price);
     // const [img, onChangeImg] = useState(null);
 
     return (
@@ -22,6 +23,14 @@ const UpdateAdvertisementForm = ({route}) => {
                         onChangeText={onChangeTextTitle}
                         placeholder="Title"
                     />
+                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Decription:</FormControlLabel>
+                    <TextArea
+                        size={"lg"}
+                        totalLines={5}
+                        value={description}
+                        onChangeText={onChangeTextDescription}
+                        placeholder="Description"
+                    />
                     {/*Price*/}
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
                     <Input
@@ -31,10 +40,14 @@ const UpdateAdvertisementForm = ({route}) => {
                         placeholder="Price"
                         keyboardType="numeric"
                     />
+
+                    <Button size="md">Update</Button>
                 </VStack>
             </Center>
         </NativeBaseProvider>
     );
 }
+
+
 
 export default UpdateAdvertisementForm;
