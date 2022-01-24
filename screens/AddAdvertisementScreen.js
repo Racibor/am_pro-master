@@ -13,13 +13,15 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [description, onChangeTextDescription] = React.useState("");
     const [price, onChangePrice] = React.useState("");
     const [selectedValue, setSelectedValue] = useState("");
+    const [alertShow, setAlertShow] = useState(false);
+
 
     const [categories, setCategories] = useState([
         {name: 'Odzieź', key: '1'},
         {name: 'Biologia', key: '2'}
     ]);
 
-    const toast = useToast();
+
     const categoryItems = categories.map( (item) => {
         return <Select.Item value={item.name} label={item.name}/>
     })
@@ -114,18 +116,16 @@ const AddAdvertisementScreen = ({navigation}) => {
             </Select>
             </View>
             </ScrollView>
-                        <Button
-                            style={{height:70,marginHorizontal:20,marginVertical:10}}
-                            onPress={async () => {
-                            myToast.show({description: "Adding advertisement...",});
-                            const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
-                            .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)})
-                            .then(()=>{myToast.show({description: "Advertisement has been added!",})});
-                            }}
-                        >
-                        Create Advertisement
-                        </Button>
-
+            <Button
+                style={{height:70,marginHorizontal:20,marginVertical:10}}
+                onPress={async () => {
+                const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
+                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)})
+                .then(()=>{toast.show({description: "Advertisement has been added!",})});
+                }}
+            >
+            Create Advertisement
+            </Button>
         </ImageBackground>
         </View>
         </NativeBaseProvider>

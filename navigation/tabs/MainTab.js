@@ -11,6 +11,8 @@ const MainTab = createBottomTabNavigator();
 
 const Tabs = () => {
 
+    let  [,setState] = useState();
+    useEffect(()=>{setState()},[]);
 
     return (
         <MainTab.Navigator
@@ -65,7 +67,7 @@ const Tabs = () => {
             }}
         >
             <MainTab.Screen name="Advertisements" component={Drawer} />
-            <MainTab.Screen name="Add" component={StackCamera} />
+            {global.logged && <MainTab.Screen name="Add" component={StackCamera} />}
             <MainTab.Screen name="Profile" component={StackNavigationProfile} />
         </MainTab.Navigator>
     );

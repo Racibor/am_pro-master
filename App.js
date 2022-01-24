@@ -10,8 +10,7 @@ import ImgToBase64 from 'react-native-image-base64';
 import axios from "axios";
 
 export default function App() {
-   global.logged = false
-   global.user = ""
+
 
   return (
 	<NavigationContainer>

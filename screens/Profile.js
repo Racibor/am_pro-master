@@ -1,8 +1,9 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {View, Text, StyleSheet, Button} from "react-native";
 import {StatusBar} from "expo-status-bar";
 
 const Profile = ({navigation} ) => {
+
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>

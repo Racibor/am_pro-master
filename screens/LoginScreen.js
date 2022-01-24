@@ -4,8 +4,11 @@ import AdvertisementCard from "../components/AdvertisementCard";
 import axios from "axios";
 import SearchBar from "../components/SeachBar";
 import { Input, NativeBaseProvider } from "native-base";
+import {useDispatch, useSelector} from 'react-redux';
+import setLogin from "../navigation/navigationservice/navigationSlice";
 
 const LoginScreen = ({navigation} ) => {
+    const dispatch = useDispatch();
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     axios.defaults.withCredentials = true;
@@ -37,8 +40,7 @@ const LoginScreen = ({navigation} ) => {
                         'Authentication': login + ':' + password
                     }})
                                 .then(function (res) {
-                                    global.logged = true;
-                                    global.user = login;
+                                dispatch(setLogin(true));
                                     navigation.goBack();
                                 }).catch(function (err) {
                                     console.warn("Wykryto błąd (logowanie)");
