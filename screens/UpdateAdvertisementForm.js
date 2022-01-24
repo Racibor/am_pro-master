@@ -6,10 +6,12 @@ import axios from "axios";
 
 const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
+    const key = data.key;
+    const img = data.base64Image;
     const [title, onChangeTextTitle] = useState(data.title);
     const [description, onChangeTextDescription] = React.useState(data.description);
     const [price, onChangePrice] = useState(data.price);
-    const [selectedValue, setSelectedValue] = useState(data.category);
+    const [category, setCategory] = useState(data.category);
     const [categories, setCategories] = useState([]);
 
     const categoryItems = categories.map( (item) => {
@@ -29,10 +31,28 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
         })
     }, []);
 
+    const updateAdvert = () => {
+        console.log("PUT update ogloszenie!");
+        let advertisementRequestObj = {
+            key: key,
+            title: title,
+            description: description,
+            price: price,
+            category: category,
+            base64Image: img
+        }
+        //TODO poprawic w REST CONTROLERZE cialo metody dla PUT
+        axios.put('http://80.211.251.152:8080/api/advertisements/edit?name='+(key*2), advertisementRequestObj)
+            .then( response => {
+                console.log(response.status);
+                navigation.navigate("Your Advertisements");
+            });
+    };
+
     return (
         <NativeBaseProvider>
             <Center flex={1} bg="tertiary.300">
-                <VStack width="90%" mx="3" space={2}>
+                <VStack width="90%" mx="3" space={6}>
                     {/*Title*/}
                     <Box>
                         <FormControlLabel _text={{bold: true, fontSize: 20}}>Title:</FormControlLabel>
@@ -42,8 +62,6 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                             onChangeText={onChangeTextTitle}
                             placeholder="Title"
                         />
-                    </Box>
-                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Decription:</FormControlLabel>
                     <TextArea
                         size={"lg"}
@@ -52,10 +70,8 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                         onChangeText={onChangeTextDescription}
                         placeholder="Description"
                     />
-                    </Box>
                     {/*Price*/}
                     {/*TODO POPRAWIC CENE*/}
-                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
                     <Input
                         size={"lg"}
@@ -64,19 +80,20 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                         placeholder="Price"
                         keyboardType="numeric"
                     />
-                    </Box>
                     {/*categories*/}
-                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Category:</FormControlLabel>
                     <Select
                         size={"lg"}
-                        selectedValue={selectedValue}
-                        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                        selectedValue={category}
+                        onValueChange={(itemValue) => setCategory(itemValue)}
                     >
                         {categoryItems}
                     </Select>
                     </Box>
-                    <Button size="md">Update</Button>
+                    <Button
+                        size="md"
+                        onPress={updateAdvert}
+                    >Update</Button>
                 </VStack>
             </Center>
         </NativeBaseProvider>
