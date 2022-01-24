@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import FontIcon from 'react-native-vector-icons/FontAwesome5'
+import FontIcon5 from 'react-native-vector-icons/FontAwesome5'
 import { colors } from '../../theme'
 import StackNavigationProfile from "../stacks/StackProfile";
 import StackCamera from "../stacks/StackCamera";
@@ -19,9 +19,9 @@ const Tabs = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     switch (route.name) {
-                        case 'Find':
+                        case 'Advertisements':
                             return (
-                                <FontIcon
+                                <FontIcon5
                                     name="search"
                                     color={focused ? colors.black : colors.gray}
                                     size={25}
@@ -30,7 +30,7 @@ const Tabs = () => {
                             )
                         case 'Add':
                             return (
-                                <FontIcon
+                                <FontIcon5
                                     name="plus-circle"
                                     color={focused ? colors.black : colors.gray}
                                     size={25}
@@ -39,7 +39,7 @@ const Tabs = () => {
                             )
                         case 'Profile':
                             return (
-                                <FontIcon
+                                <FontIcon5
                                     name="user"
                                     color={focused ? colors.black : colors.gray}
                                     size={25}

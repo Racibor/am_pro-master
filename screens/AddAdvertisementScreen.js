@@ -3,6 +3,7 @@ import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'r
 import {Input, NativeBaseProvider, Button, Select, useToast} from "native-base";
 import axios from "axios";
 import * as FileSystem from 'expo-file-system';
+import {useSelector} from "react-redux";
 
 const backgroundImage = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
 global.tempImage = "empty";
@@ -14,6 +15,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [price, onChangePrice] = React.useState("");
     const [selectedValue, setSelectedValue] = useState("");
     const [alertShow, setAlertShow] = useState(false);
+    const {userLogin} = useSelector(state => state.nav);
 
 
     const [categories, setCategories] = useState([
@@ -41,7 +43,7 @@ const AddAdvertisementScreen = ({navigation}) => {
 
     const createAdvert = (title, desc, price, category, img) => {
         let advertisementRequestObj = {
-            user: global.user,
+            user: userLogin,
             key: null,
             title: title,
             description: desc,

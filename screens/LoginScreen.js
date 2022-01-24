@@ -49,14 +49,14 @@ const LoginScreen = ({navigation}) => {
                                 value={login}
                                 onChangeText={setLogin}
                                 placeholder="Title"
-                            />
+                />
                          <Text style={styles.text}>Password:</Text>
                 <Input
                                 style={styles.input}
                                 value={password}
                                 onChangeText={setPassword}
                                 placeholder="Title"
-                            />
+                />
                 <Button
                      title="Login"
                      onPress={loginHandler}

@@ -42,7 +42,8 @@
     "yarn": "^1.22.17"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "react-native-vector-icons": "^9.0.0"
   },
   "private": true
 }
