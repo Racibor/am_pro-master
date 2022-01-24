@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontIcon from 'react-native-vector-icons/FontAwesome5'
@@ -10,6 +10,8 @@ import Drawer from "../drawers/Drawer";
 const MainTab = createBottomTabNavigator();
 
 const Tabs = () => {
+
+
     return (
         <MainTab.Navigator
             screenOptions={({ route }) => ({
@@ -62,7 +64,7 @@ const Tabs = () => {
                 }
             }}
         >
-            <MainTab.Screen name="Drawer" component={Drawer} />
+            <MainTab.Screen name="Advertisements" component={Drawer} />
             <MainTab.Screen name="Add" component={StackCamera} />
             <MainTab.Screen name="Profile" component={StackNavigationProfile} />
         </MainTab.Navigator>

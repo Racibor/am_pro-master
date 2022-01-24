@@ -5,7 +5,7 @@ import axios from "axios";
 import SearchBar from "../components/SeachBar";
 import { Input, NativeBaseProvider } from "native-base";
 
-const LoginScreen = (prop ) => {
+const LoginScreen = ({navigation} ) => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     axios.defaults.withCredentials = true;
@@ -13,12 +13,16 @@ const LoginScreen = (prop ) => {
     return (
     <NativeBaseProvider>
         <View style={styles.container}>
+            <View style={{backgroundColor:'#444' , margin:5 }}>
+            <Text style={[styles.text,{fontSize:30}]}>{"Sign in to your account:"}</Text>
+            <Text style={styles.text}>Login:</Text>
             <Input
                             style={styles.input}
                             value={login}
                             onChangeText={setLogin}
                             placeholder="Title"
                         />
+                     <Text style={styles.text}>Password:</Text>
             <Input
                             style={styles.input}
                             value={password}
@@ -34,12 +38,14 @@ const LoginScreen = (prop ) => {
                     }})
                                 .then(function (res) {
                                     global.logged = true;
-                                    global.user = login
+                                    global.user = login;
+                                    navigation.goBack();
                                 }).catch(function (err) {
                                     console.warn("Wykryto błąd (logowanie)");
                                 });
                  }}
             />
+                                </View>
         </View>
         </NativeBaseProvider>
     );
@@ -56,8 +62,22 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#121212',
-    }
+        backgroundColor: '#000',
+    },
+    input: {
+        backgroundColor: 'white',
+        height: 40,
+        marginHorizontal: 12,
+        marginBottom: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+    text: {
+        color: '#eee',
+        fontSize: 17,
+        marginLeft: 12,
+    },
 });

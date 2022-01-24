@@ -15,7 +15,6 @@ const StackNavigationAdvertisement = (props) => {
                 { props => <FindScreen props={props} category={cat}/>}
             </Stack.Screen>
             <Stack.Screen name="AdvertisementDetails" component={AdvertisementDetails} />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
         </Stack.Navigator>
     );
 }

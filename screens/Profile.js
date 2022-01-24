@@ -6,6 +6,7 @@ const Profile = ({navigation} ) => {
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>
+            <Text>{(global.logged)?"Logged in as "+global.login:""}</Text>
             <Button
                 title="Login"
                 onPress={() => navigation.navigate('LoginScreen')}
