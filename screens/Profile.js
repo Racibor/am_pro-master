@@ -7,8 +7,16 @@ const Profile = ({navigation} ) => {
         <View style={styles.container}>
             <Text>Profile Screen</Text>
             <Button
+                title="Login"
+                onPress={() => navigation.navigate('LoginScreen')}
+            />
+            <Button
                 title="Your Advertisements"
                 onPress={() => navigation.navigate("Your Advertisements")}
+            />
+            <Button
+               title="Go to Details"
+               onPress={() => navigation.navigate('ProfileDetails')}
             />
             <StatusBar style="auto" />
         </View>

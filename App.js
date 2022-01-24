@@ -7,8 +7,12 @@ import Tabs from "./navigation/tabs/MainTab";
 import Drawer from "./navigation/drawers/Drawer";
 import Home from "./screens/Home";
 import ImgToBase64 from 'react-native-image-base64';
+import axios from "axios";
 
 export default function App() {
+   global.logged = false
+   global.user = ""
+
   return (
 	<NavigationContainer>
 	    <Home/>
