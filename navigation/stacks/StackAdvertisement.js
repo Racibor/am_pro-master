@@ -1,6 +1,7 @@
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import FindScreen from "../../screens/FindScreen";
+import LoginScreen from "../../screens/LoginScreen";
 import AdvertisementDetails from "../../screens/AdvertisementDetails";
 
 const Stack = createNativeStackNavigator();
@@ -14,6 +15,7 @@ const StackNavigationAdvertisement = (props) => {
                 { props => <FindScreen props={props} category={cat}/>}
             </Stack.Screen>
             <Stack.Screen name="AdvertisementDetails" component={AdvertisementDetails} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
         </Stack.Navigator>
     );
 }
