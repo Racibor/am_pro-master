@@ -12,8 +12,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [title, onChangeTextTitle] = React.useState("");
     const [description, onChangeTextDescription] = React.useState("");
     const [price, onChangePrice] = React.useState("");
-    const [img, onChangeImg] = useState(null);
-    const [selectedValue, setSelectedValue] = useState();
+    const [selectedValue, setSelectedValue] = useState("");
 
     const [categories, setCategories] = useState([
         {name: 'Odzieź', key: '1'},

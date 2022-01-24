@@ -4,7 +4,6 @@ import { Camera } from 'expo-camera';
 
 export default function CameraScreen({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
 
     useEffect(() => {
         (async () => {

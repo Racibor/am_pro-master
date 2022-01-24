@@ -3,7 +3,6 @@ import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
 import {Box, Button, Center, Input, Select, TextArea, VStack, Image, ScrollView} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
-import {StyleSheet} from "react-native";
 
 const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
@@ -58,8 +57,8 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                         {/*Title*/}
                         <Box>
                             <FormControlLabel _text={{bold: true, fontSize: 20}}>Image:</FormControlLabel>
+                            {/*IMG*/}
                             <Box alignItems="center">
-                                {/*IMG*/}
                                 <Box style={{ borderColor: 'black',
                                             borderStyle: 'solid',
                                             borderWidth: 4,}}>
@@ -96,11 +95,10 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                                 placeholder="Description"
                             />
                             {/*Price*/}
-                            {/*TODO POPRAWIC CENE*/}
                             <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
                             <Input
                                 size={"lg"}
-                                value={price.toInteger}
+                                value={price.toString()}
                                 onChangeText={onChangePrice}
                                 placeholder="Price"
                                 keyboardType="numeric"
@@ -126,14 +124,4 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
     );
 }
 
-
-
 export default UpdateAdvertisementForm;
-const styles = StyleSheet.create({
-    advertImage: {
-        flex:1,
-        aspectRatio: 1.5,
-        marginHorizontal:10,
-        resizeMode: 'cover'
-    },
-});
