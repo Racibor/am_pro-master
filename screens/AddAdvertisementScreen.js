@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'react-native';
-import { Input, NativeBaseProvider,Button } from "native-base";
+import {Input, NativeBaseProvider, Button, Select} from "native-base";
 import axios from "axios";
 import * as FileSystem from 'expo-file-system';
 
@@ -13,7 +13,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [description, onChangeTextDescription] = React.useState("");
     const [price, onChangePrice] = React.useState("");
     const [img, onChangeImg] = useState(null);
-    const [selectedValue, setSelectedValue] = useState(null);
+    const [selectedValue, setSelectedValue] = useState();
 
     const [categories, setCategories] = useState([
         {name: 'Odzieź', key: '1'},
@@ -21,7 +21,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     ]);
 
     const categoryItems = categories.map( (item) => {
-        return <Picker.Item key={item.key} value={item.name} label={item.name}/>
+        return <Select.Item value={item.name} label={item.name}/>
     })
 
     useEffect( () => {
@@ -105,13 +105,13 @@ const AddAdvertisementScreen = ({navigation}) => {
 
             <View style={{backgroundColor:'#444' , margin:5 }}>
             <Text style={styles.text}>In which category should it be?:</Text>
-            <Picker
+            <Select
                 selectedValue={selectedValue}
                 style={{ height: 50, width: 150}}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
             >
                 {categoryItems}
-            </Picker>
+            </Select>
             </View>
 
             <Button
