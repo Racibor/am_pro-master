@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
-import {Button, Center, Input, Select, TextArea, VStack} from "native-base";
+import {Box, Button, Center, Input, Select, TextArea, VStack} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
 
@@ -32,15 +32,18 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
     return (
         <NativeBaseProvider>
             <Center flex={1} bg="tertiary.300">
-                <VStack width="90%" mx="3">
+                <VStack width="90%" mx="3" space={2}>
                     {/*Title*/}
-                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Title:</FormControlLabel>
-                    <Input
-                        size={"lg"}
-                        value={title}
-                        onChangeText={onChangeTextTitle}
-                        placeholder="Title"
-                    />
+                    <Box>
+                        <FormControlLabel _text={{bold: true, fontSize: 20}}>Title:</FormControlLabel>
+                        <Input
+                            size={"lg"}
+                            value={title}
+                            onChangeText={onChangeTextTitle}
+                            placeholder="Title"
+                        />
+                    </Box>
+                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Decription:</FormControlLabel>
                     <TextArea
                         size={"lg"}
@@ -49,7 +52,10 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                         onChangeText={onChangeTextDescription}
                         placeholder="Description"
                     />
+                    </Box>
                     {/*Price*/}
+                    {/*TODO POPRAWIC CENE*/}
+                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
                     <Input
                         size={"lg"}
@@ -58,7 +64,9 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                         placeholder="Price"
                         keyboardType="numeric"
                     />
+                    </Box>
                     {/*categories*/}
+                    <Box>
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Category:</FormControlLabel>
                     <Select
                         size={"lg"}
@@ -67,6 +75,7 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                     >
                         {categoryItems}
                     </Select>
+                    </Box>
                     <Button size="md">Update</Button>
                 </VStack>
             </Center>
