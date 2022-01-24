@@ -1,9 +1,8 @@
 import {combineReducers} from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import navigationSlice from "../../navigation/navigationservice/navigationSlice";
 
 const rootReducer = combineReducers({
-navigation: navigationSlice,
+    nav: navigationSlice,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
 export default rootReducer;

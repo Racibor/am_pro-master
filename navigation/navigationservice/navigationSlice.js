@@ -1,20 +1,23 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
-isLogged: false,
-username: ""
+    isLogged: false,
+    userLogin: "cos",
 };
 
 const navigationSlice = createSlice({
-name: "Category",
-reduces: {
-setLogin(state,action){
-state.isLogged = action.payload
-}
-},
-initialState,
+    name: "nav",
+    initialState,
+    reducers: {
+        setLoginIn(state,action){
+            state.isLogged = action.payload
+        },
+        setUsername(state,action){
+            state.userLogin = action.payload
+        }
+    },
 });
 
-export const {setLogin} = navigationSlice.actions;
+export const {setLoginIn, setUsername} = navigationSlice.actions;
 export default navigationSlice.reducer;
 

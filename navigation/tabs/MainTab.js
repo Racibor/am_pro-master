@@ -6,13 +6,13 @@ import { colors } from '../../theme'
 import StackNavigationProfile from "../stacks/StackProfile";
 import StackCamera from "../stacks/StackCamera";
 import Drawer from "../drawers/Drawer";
+import {useSelector} from "react-redux";
 
 const MainTab = createBottomTabNavigator();
 
 const Tabs = () => {
 
-    let  [,setState] = useState();
-    useEffect(()=>{setState()},[]);
+    const {isLogged} = useSelector(state => state.nav);
 
     return (
         <MainTab.Navigator
@@ -67,7 +67,7 @@ const Tabs = () => {
             }}
         >
             <MainTab.Screen name="Advertisements" component={Drawer} />
-            {global.logged && <MainTab.Screen name="Add" component={StackCamera} />}
+            {isLogged && <MainTab.Screen name="Add" component={StackCamera} />}
             <MainTab.Screen name="Profile" component={StackNavigationProfile} />
         </MainTab.Navigator>
     );
