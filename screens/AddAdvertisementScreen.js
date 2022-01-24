@@ -38,6 +38,7 @@ const AddAdvertisementScreen = ({navigation}) => {
 
     const createAdvert = (title, desc, price, category, img) => {
         let advertisementRequestObj = {
+            user: global.user,
             key: null,
             title: title,
             description: desc,

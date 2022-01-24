@@ -7,6 +7,10 @@ const Profile = ({navigation} ) => {
         <View style={styles.container}>
             <Text>Profile Screen</Text>
             <Button
+                title="Login"
+                onPress={() => navigation.navigate('LoginScreen')}
+            />
+            <Button
                 title="Go to Details"
                 onPress={() => navigation.navigate('ProfileDetails')}
             />

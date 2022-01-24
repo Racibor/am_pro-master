@@ -6,8 +6,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Tabs from "./navigation/tabs/MainTab";
 import Drawer from "./navigation/drawers/Drawer";
 import Home from "./screens/Home";
+import axios from "axios";
 
 export default function App() {
+   global.logged = false
+   global.user = ""
+
   return (
 	<NavigationContainer>
 	    <Home/>
