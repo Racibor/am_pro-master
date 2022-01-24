@@ -46,7 +46,7 @@ const SearchBar = (props) => {
                             Keyboard.dismiss();
                             props.setClicked(false);
                         }}
-                    ></Button>
+                    />
                 </View>
             )}
         </View>
