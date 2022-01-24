@@ -18,24 +18,20 @@ const LoginScreen = ({navigation}) => {
 
     axios.defaults.withCredentials = true;
 
-    useEffect(() => {
-        console.warn(userLogin);
-    }, [success, login]);
 
     const loginHandler = () => {
-
-                                let params = {'asd':''}
-                                axios.post('http://80.211.251.152:8080/login', params, {headers: {
-                                    'Authentication': login + ':' + password
-                                }})
-                                .then(function (res) {
-                                    setSuccess(true);
-                                    dispatch(setLoginIn(true));
-                                    dispatch(setUsername(login));
-                                    navigation.goBack();
-                                }).catch(function (err) {
-                                    console.warn("Wykryto błąd (logowanie)");
-                                });
+        let params = {'asd':''}
+        axios.post('http://80.211.251.152:8080/login', params, {headers: {
+            'Authentication': login + ':' + password
+        }})
+        .then(function (res) {
+            setSuccess(true);
+            dispatch(setLoginIn(true));
+            dispatch(setUsername(login));
+            navigation.goBack();
+        }).catch(function (err) {
+            console.warn("Wykryto błąd (logowanie)");
+        });
     }
 
     return (

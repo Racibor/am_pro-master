@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import {View, Text, StyleSheet, Button} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import {useDispatch, useSelector} from 'react-redux';
-import axios from "axios";
 import {setLoginIn, setUsername} from "../navigation/navigationservice/navigationSlice";
+import {NativeBaseProvider,Button} from "native-base";
+import axios from "axios";
 
 const Profile = ({navigation} ) => {
 
@@ -18,29 +19,34 @@ const Profile = ({navigation} ) => {
     }
 
     return (
+    <NativeBaseProvider>
         <View style={styles.container}>
-            <Text>Profile Screen</Text>
-            <Text>{(isLogged)?"Logged in as "+userLogin:""}</Text>
+            <View style={{backgroundColor:'#444' , margin:5,height:200 }}>
+            <Text style={[styles.text,{fontSize:25,fontWeight:'bold'}]}>Profile Screen</Text>
+            <Text style={styles.text}>{(isLogged)?"Logged in as "+userLogin:""}</Text>
             <Button
-                title={isLogged ? "Logout": "Login"}
-                onPress={() => {
-                    if(isLogged) {
-                        logoutHandler()
-                    } else {
-                        navigation.navigate('LoginScreen')
-                    }
-                }}
-            />
+            style={{height:40,marginHorizontal:20,marginVertical:10}}
+                            onPress={() => {
+                                if(isLogged) {
+                                    logoutHandler()
+                                } else {
+                                    navigation.navigate('LoginScreen')
+                                }
+                            }}
+            >{isLogged ? "Logout": "Login"}
+            </Button>
+
             <Button
-                title="Your Advertisements"
-                onPress={() => navigation.navigate("Your Advertisements")}
-            />
-            <Button
-               title="Go to Details"
-               onPress={() => navigation.navigate('ProfileDetails')}
-            />
+            style={{height:40,marginHorizontal:20,marginVertical:10}}
+            isDisabled = {!isLogged}
+            onPress={() => navigation.navigate("Your Advertisements")}
+            >{"Your Advertisements"}
+            </Button>
+
+            </View>
             <StatusBar style="auto" />
         </View>
+    </NativeBaseProvider>
     );
 }
 
@@ -49,8 +55,22 @@ export default Profile;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#9e8acb',
-    }
+        backgroundColor: '#111',
+    },
+        input: {
+            backgroundColor: 'white',
+            height: 40,
+            marginHorizontal: 12,
+            marginBottom: 12,
+            borderWidth: 1,
+            padding: 10,
+        },
+        text: {
+            color: '#eee',
+            fontSize: 17,
+            marginLeft: 12,
+        },
 });

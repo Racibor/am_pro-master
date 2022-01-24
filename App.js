@@ -5,6 +5,10 @@ import Home from "./screens/Home";
 import {Provider} from "react-redux";
 import store from "./components/redux/store";
 
+global.logged = false;
+global.username = "";
+
+
 
 export default function App() {
 

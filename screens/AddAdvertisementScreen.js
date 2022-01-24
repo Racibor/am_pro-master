@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'react-native';
-import {Input, NativeBaseProvider, Button, Select, useToast} from "native-base";
+import {Input, NativeBaseProvider, Button, Select, useToast,Collapse} from "native-base";
 import axios from "axios";
 import * as FileSystem from 'expo-file-system';
 import {useSelector} from "react-redux";
@@ -53,7 +53,7 @@ const AddAdvertisementScreen = ({navigation}) => {
         }
         axios.post('http://80.211.251.152:8080/api/advertisements', advertisementRequestObj)
             .then( response => {
-                console.log(response);
+                console.log(response.status);
 
                 onChangeTextTitle("");
                 onChangeTextDescription("");
@@ -122,8 +122,7 @@ const AddAdvertisementScreen = ({navigation}) => {
                 style={{height:70,marginHorizontal:20,marginVertical:10}}
                 onPress={async () => {
                 const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
-                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)})
-                .then(()=>{toast.show({description: "Advertisement has been added!",})});
+                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)});
                 }}
             >
             Create Advertisement
