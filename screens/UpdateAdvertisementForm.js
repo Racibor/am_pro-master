@@ -34,15 +34,15 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
     const updateAdvert = () => {
         console.log("PUT update ogloszenie!");
         let advertisementRequestObj = {
+            user: global.user,
             key: key,
             title: title,
             description: description,
             price: price,
             category: category,
             base64Image: img
-        }
-        //TODO poprawic w REST CONTROLERZE cialo metody dla PUT
-        axios.put('http://80.211.251.152:8080/api/advertisements/edit?name='+(key*2), advertisementRequestObj)
+        };
+        axios.put('http://80.211.251.152:8080/api/advertisements', advertisementRequestObj)
             .then( response => {
                 console.log(response.status);
                 navigation.navigate("Your Advertisements");

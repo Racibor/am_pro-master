@@ -11,7 +11,7 @@ const YourAdvertisements = (props) => {
     useEffect( () => {
         navigation.addListener('focus', () => {
             axios.get(
-                'http://80.211.251.152:8080/api/advertisements'
+                'http://80.211.251.152:8080/api/advertisements/mine'
             ).then( (response) => {
                 console.log("Pobrano ogloszenia z GET!");
                 setAdvertisement(response.data);
