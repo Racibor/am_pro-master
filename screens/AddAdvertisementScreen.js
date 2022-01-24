@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'react-native';
-import { Input, NativeBaseProvider,Button } from "native-base";
+import {Input, NativeBaseProvider, Button, Select} from "native-base";
 import axios from "axios";
 import * as FileSystem from 'expo-file-system';
 
@@ -21,7 +21,7 @@ const AddAdvertisementScreen = ({navigation}) => {
     ]);
 
     const categoryItems = categories.map( (item) => {
-        return <Picker.Item key={item.key} value={item.name} label={item.name}/>
+        return <Select.Item value={item.name} label={item.name}/>
     })
 
     useEffect( () => {
@@ -105,22 +105,20 @@ const AddAdvertisementScreen = ({navigation}) => {
 
             <View style={{backgroundColor:'#444' , margin:5 }}>
             <Text style={styles.text}>In which category should it be?:</Text>
-            <Picker
+            <Select
                 selectedValue={selectedValue}
                 style={{ height: 50, width: 150}}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                onValueChange={(itemValue) => setSelectedValue(itemValue)}
             >
                 {categoryItems}
-            </Picker>
+            </Select>
             </View>
 
             <Button
                 style={{height:70,marginHorizontal:20,marginVertical:10}}
                 onPress={async () => {
                 const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
-                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)});
-                console.log(temp.length);
-                }}
+                .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)});}}
             >
             Create Advertisement
             </Button>
