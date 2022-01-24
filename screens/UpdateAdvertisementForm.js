@@ -4,12 +4,12 @@ import {Button, Center, Input, Select, TextArea, VStack} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
 
-const UpdateAdvertisementForm = ({route}) => {
+const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
     const [title, onChangeTextTitle] = useState(data.title);
     const [description, onChangeTextDescription] = React.useState(data.description);
     const [price, onChangePrice] = useState(data.price);
-    const [selectedValue, setSelectedValue] = useState(null);
+    const [selectedValue, setSelectedValue] = useState(data.category);
     const [categories, setCategories] = useState([]);
 
     const categoryItems = categories.map( (item) => {
@@ -53,17 +53,20 @@ const UpdateAdvertisementForm = ({route}) => {
                     <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
                     <Input
                         size={"lg"}
-                        value={price}
+                        value={price.toInteger}
                         onChangeText={onChangePrice}
                         placeholder="Price"
                         keyboardType="numeric"
                     />
-                    {/*<Select*/}
-                    {/*    selectedValue={selectedValue}*/}
-                    {/*    onValueChange={(itemValue) => setSelectedValue(itemValue)}*/}
-                    {/*>*/}
-                    {/*    {categoryItems}*/}
-                    {/*</Select>*/}
+                    {/*categories*/}
+                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Category:</FormControlLabel>
+                    <Select
+                        size={"lg"}
+                        selectedValue={selectedValue}
+                        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                    >
+                        {categoryItems}
+                    </Select>
                     <Button size="md">Update</Button>
                 </VStack>
             </Center>
