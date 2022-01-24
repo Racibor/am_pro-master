@@ -1,15 +1,33 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
-import {Button, Center, Input, Stack, TextArea, VStack} from "native-base";
+import {Button, Center, Input, Select, TextArea, VStack} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
+import axios from "axios";
 
 const UpdateAdvertisementForm = ({route}) => {
     let data = route.params;
-    console.log(data.description);
     const [title, onChangeTextTitle] = useState(data.title);
     const [description, onChangeTextDescription] = React.useState(data.description);
     const [price, onChangePrice] = useState(data.price);
-    // const [img, onChangeImg] = useState(null);
+    const [selectedValue, setSelectedValue] = useState(null);
+    const [categories, setCategories] = useState([]);
+
+    const categoryItems = categories.map( (item) => {
+        return <Select.Item key={item.key} value={item.name} label={item.name}/>
+    })
+
+    useEffect( () => {
+        navigation.addListener('focus', () => {
+            axios.get(
+                'http://80.211.251.152:8080/api/categories'
+            ).then( (response) => {
+                console.log("Pobrano kategorie z GET!");
+                setCategories(response.data);
+            }).catch( (error) => {
+                console.log("Wykryto blad (ladowanie kategorii)!");
+            });
+        })
+    }, []);
 
     return (
         <NativeBaseProvider>
@@ -40,7 +58,12 @@ const UpdateAdvertisementForm = ({route}) => {
                         placeholder="Price"
                         keyboardType="numeric"
                     />
-
+                    {/*<Select*/}
+                    {/*    selectedValue={selectedValue}*/}
+                    {/*    onValueChange={(itemValue) => setSelectedValue(itemValue)}*/}
+                    {/*>*/}
+                    {/*    {categoryItems}*/}
+                    {/*</Select>*/}
                     <Button size="md">Update</Button>
                 </VStack>
             </Center>
