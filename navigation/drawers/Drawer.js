@@ -8,7 +8,7 @@ import StackNavigationAdvertisement from "../stacks/StackAdvertisement";
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
-    const [categories, setCategories] = useState([{key: 0, name: 't'}]);
+    const [categories, setCategories] = useState([{key: 0, name: 'Loading categories...'}]);
 
     useEffect(() => {
         axios

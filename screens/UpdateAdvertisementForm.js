@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
-import {Box, Button, Center, Input, Select, TextArea, VStack} from "native-base";
+import {Box, Button, Center, Input, Select, TextArea, VStack, Image, ScrollView} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
+import {StyleSheet} from "react-native";
 
 const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
@@ -51,51 +52,76 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
 
     return (
         <NativeBaseProvider>
-            <Center flex={1} bg="tertiary.300">
-                <VStack width="90%" mx="3" space={6}>
-                    {/*Title*/}
-                    <Box>
-                        <FormControlLabel _text={{bold: true, fontSize: 20}}>Title:</FormControlLabel>
-                        <Input
-                            size={"lg"}
-                            value={title}
-                            onChangeText={onChangeTextTitle}
-                            placeholder="Title"
-                        />
-                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Decription:</FormControlLabel>
-                    <TextArea
-                        size={"lg"}
-                        totalLines={5}
-                        value={description}
-                        onChangeText={onChangeTextDescription}
-                        placeholder="Description"
-                    />
-                    {/*Price*/}
-                    {/*TODO POPRAWIC CENE*/}
-                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
-                    <Input
-                        size={"lg"}
-                        value={price.toInteger}
-                        onChangeText={onChangePrice}
-                        placeholder="Price"
-                        keyboardType="numeric"
-                    />
-                    {/*categories*/}
-                    <FormControlLabel _text={{bold: true, fontSize: 20}}>Category:</FormControlLabel>
-                    <Select
-                        size={"lg"}
-                        selectedValue={category}
-                        onValueChange={(itemValue) => setCategory(itemValue)}
-                    >
-                        {categoryItems}
-                    </Select>
-                    </Box>
-                    <Button
-                        size="md"
-                        onPress={updateAdvert}
-                    >Update</Button>
-                </VStack>
+        <ScrollView>
+            <Center flex={1} bg="darkBlue.500">
+                    <VStack width="90%" mx="3" space={6}>
+                        {/*Title*/}
+                        <Box>
+                            <FormControlLabel _text={{bold: true, fontSize: 20}}>Image:</FormControlLabel>
+                            <Box alignItems="center">
+                                {/*IMG*/}
+                                <Box style={{ borderColor: 'black',
+                                            borderStyle: 'solid',
+                                            borderWidth: 4,}}>
+                                    <Image
+                                        size={"2xl"}
+                                        resizeMode="cover"
+                                        aspectRatio={1.5}
+                                        source={{
+                                            uri: 'data:image/png;base64,' + img,
+                                        }}
+                                        alt={"Alternate Text " + "lg"}
+                                    />
+                                </Box>
+                            </Box>
+                            <Button style={{marginHorizontal:10, marginVertical:10}}
+                                    onPress={() => navigation.navigate("Camera Screen")}
+                                    colorScheme={'red'}>
+                                Take photo
+                            </Button>
+                            {/*TITLE*/}
+                            <FormControlLabel _text={{bold: true, fontSize: 20}}>Title:</FormControlLabel>
+                            <Input
+                                size={"lg"}
+                                value={title}
+                                onChangeText={onChangeTextTitle}
+                                placeholder="Title"
+                            />
+                            <FormControlLabel _text={{bold: true, fontSize: 20}}>Decription:</FormControlLabel>
+                            <TextArea
+                                size={"lg"}
+                                totalLines={5}
+                                value={description}
+                                onChangeText={onChangeTextDescription}
+                                placeholder="Description"
+                            />
+                            {/*Price*/}
+                            {/*TODO POPRAWIC CENE*/}
+                            <FormControlLabel _text={{bold: true, fontSize: 20}}>Price:</FormControlLabel>
+                            <Input
+                                size={"lg"}
+                                value={price.toInteger}
+                                onChangeText={onChangePrice}
+                                placeholder="Price"
+                                keyboardType="numeric"
+                            />
+                            {/*categories*/}
+                            <FormControlLabel _text={{bold: true, fontSize: 20}}>Category:</FormControlLabel>
+                            <Select
+                                size={"lg"}
+                                selectedValue={category}
+                                onValueChange={(itemValue) => setCategory(itemValue)}
+                            >
+                                {categoryItems}
+                            </Select>
+                        </Box>
+                        <Button style={{marginBottom:30}} size="md" onPress={updateAdvert}
+                                colorScheme={'red'} >
+                            Update
+                        </Button>
+                    </VStack>
             </Center>
+        </ScrollView>
         </NativeBaseProvider>
     );
 }
@@ -103,3 +129,11 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
 
 
 export default UpdateAdvertisementForm;
+const styles = StyleSheet.create({
+    advertImage: {
+        flex:1,
+        aspectRatio: 1.5,
+        marginHorizontal:10,
+        resizeMode: 'cover'
+    },
+});
