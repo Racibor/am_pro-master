@@ -3,11 +3,13 @@ import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
 import {Box, Button, Center, Input, Select, TextArea, VStack, Image, ScrollView} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
     const key = data.key;
     const img = data.base64Image;
+    const {userLogin} = useSelector(state => state.nav);
     const [title, onChangeTextTitle] = useState(data.title);
     const [description, onChangeTextDescription] = React.useState(data.description);
     const [price, onChangePrice] = useState(data.price);
@@ -34,7 +36,7 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
     const updateAdvert = () => {
         console.log("PUT update ogloszenie!");
         let advertisementRequestObj = {
-            user: global.user,
+            user: userLogin,
             key: key,
             title: title,
             description: description,
