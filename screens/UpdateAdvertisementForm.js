@@ -3,7 +3,9 @@ import {NativeBaseProvider} from "native-base/src/core/NativeBaseProvider";
 import {Box, Button, Center, Input, Select, TextArea, VStack, Image, ScrollView} from "native-base";
 import FormControlLabel from "native-base/src/components/composites/FormControl/FormControlLabel";
 import axios from "axios";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setLastScreen} from "../navigation/navigationservice/navigationSlice";
+import * as FileSystem from "expo-file-system";
 
 const UpdateAdvertisementForm = ({route, navigation}) => {
     let data = route.params;
@@ -15,6 +17,9 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
     const [price, onChangePrice] = useState(data.price);
     const [category, setCategory] = useState(data.category);
     const [categories, setCategories] = useState([]);
+
+    const dispatch = useDispatch();
+    const {imageUri} = useSelector(state => state.nav);
 
     const categoryItems = categories.map( (item) => {
         return <Select.Item key={item.key} value={item.name} label={item.name}/>
@@ -33,7 +38,7 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
         })
     }, []);
 
-    const updateAdvert = () => {
+    const updateAdvert = (converted_image) => {
         console.log("PUT update ogloszenie!");
         let advertisementRequestObj = {
             user: userLogin,
@@ -42,7 +47,8 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
             description: description,
             price: price,
             category: category,
-            base64Image: img
+            base64Image: (imageUri === "empty") ? 'data:image/png;base64,' + img
+            : converted_image
         };
         axios.put('http://80.211.251.152:8080/api/advertisements', advertisementRequestObj)
             .then( response => {
@@ -69,14 +75,18 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                                         resizeMode="cover"
                                         aspectRatio={1.5}
                                         source={{
-                                            uri: 'data:image/png;base64,' + img,
+                                            uri: (imageUri === "empty") ? 'data:image/png;base64,' + img
+                                            : imageUri,
                                         }}
                                         alt={"Alternate Text " + "lg"}
                                     />
                                 </Box>
                             </Box>
                             <Button style={{marginHorizontal:10, marginVertical:10}}
-                                    onPress={() => navigation.navigate("Camera Screen")}
+                                    onPress={() => {
+                                        navigation.navigate("Camera Screen")
+                                        dispatch(setLastScreen("Update Advertisement Form"));
+                                    }}
                                     colorScheme={'red'}>
                                 Take photo
                             </Button>
@@ -115,8 +125,13 @@ const UpdateAdvertisementForm = ({route, navigation}) => {
                                 {categoryItems}
                             </Select>
                         </Box>
-                        <Button style={{marginBottom:30}} size="md" onPress={updateAdvert}
-                                colorScheme={'red'} >
+                        <Button style={{marginBottom:30}} size="md" onPress={
+                            async () => {
+                                await FileSystem.readAsStringAsync(imageUri, { encoding: 'base64' })
+                                    .then((converted_image)=>{updateAdvert(converted_image)});
+                            }
+                        }
+                        colorScheme={'red'} >
                             Update
                         </Button>
                     </VStack>

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import {useDispatch, useSelector} from "react-redux";
+import {setImageUri} from "../navigation/navigationservice/navigationSlice";
 
 export default function CameraScreen({navigation}) {
     const [hasPermission, setHasPermission] = useState(null);
+
+    const dispatch = useDispatch();
+    const {imageUri} = useSelector(state => state.nav);
+    const {lastScreen} = useSelector(state => state.nav);
 
     useEffect(() => {
         (async () => {
@@ -29,8 +35,13 @@ export default function CameraScreen({navigation}) {
                         if (this.camera) {
                             let photo = await this.camera.takePictureAsync({quality: 0.2,});
                             console.log(photo);
-                            global.tempImage = photo.uri;
-                            navigation.goBack();
+                            // global.tempImage = photo.uri;
+                            dispatch(setImageUri(photo.uri));
+                            navigation.navigate(
+                                (lastScreen === "AddAdvertisementScreen") ?
+                                    navigation.navigate("AddAdvertisementScreen")
+                                    : navigation.navigate("Update Advertisement Form")
+                            );
                         }
                     }} style={styles.capture}>
                         <Text style={{ fontSize: 14 }}> SNAP </Text>

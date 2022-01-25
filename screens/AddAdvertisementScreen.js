@@ -3,10 +3,10 @@ import {Text,View, StyleSheet, Picker,ImageBackground,ScrollView, Image} from 'r
 import {Input, NativeBaseProvider, Button, Select, useToast,Collapse} from "native-base";
 import axios from "axios";
 import * as FileSystem from 'expo-file-system';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setLastScreen, setImageUri} from "../navigation/navigationservice/navigationSlice";
 
 const backgroundImage = { uri: "https://t4.ftcdn.net/jpg/01/98/24/71/360_F_198247162_JwrVkhqowZb4NJC24156nV6QYRhsV8Qf.jpg" };
-global.tempImage = "empty";
 
 const AddAdvertisementScreen = ({navigation}) => {
 
@@ -17,6 +17,8 @@ const AddAdvertisementScreen = ({navigation}) => {
     const [alertShow, setAlertShow] = useState(false);
     const {userLogin} = useSelector(state => state.nav);
 
+    const dispatch = useDispatch();
+    const {imageUri} = useSelector(state => state.nav);
 
     const [categories, setCategories] = useState([
         {name: 'Odzieź', key: '1'},
@@ -58,6 +60,7 @@ const AddAdvertisementScreen = ({navigation}) => {
                 onChangeTextTitle("");
                 onChangeTextDescription("");
                 onChangePrice("");
+                dispatch(setImageUri("empty"));
             });
     };
 
@@ -70,8 +73,11 @@ const AddAdvertisementScreen = ({navigation}) => {
             <ScrollView>
             <View style={{backgroundColor:'#444' , margin:5 }}>
             <Text style={styles.text}>{"Describe your item with picture:"}</Text>
-            <Image style={(global.tempImage == "empty")?"":styles.advertImage} source ={{uri: global.tempImage}}/>
-            <Button style={{marginHorizontal:10, marginBottom:5}} onPress={() => navigation.navigate("CameraScreen")}>
+            <Image style={(imageUri === "empty")?"":styles.advertImage} source ={{uri: imageUri}}/>
+            <Button style={{marginHorizontal:10, marginBottom:5}} onPress={() => {
+                navigation.navigate("CameraScreen")
+                dispatch(setLastScreen("AddAdvertisementScreen"));
+            }}>
             Take photo
             </Button>
             </View>
@@ -121,7 +127,7 @@ const AddAdvertisementScreen = ({navigation}) => {
             <Button
                 style={{height:70,marginHorizontal:20,marginVertical:10}}
                 onPress={async () => {
-                const temp = await FileSystem.readAsStringAsync(global.tempImage, { encoding: 'base64' })
+                const temp = await FileSystem.readAsStringAsync(imageUri, { encoding: 'base64' })
                 .then((converted_image)=>{createAdvert(title, description, price, selectedValue, converted_image)});
                 }}
             >
