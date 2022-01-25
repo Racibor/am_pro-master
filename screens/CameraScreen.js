@@ -37,11 +37,7 @@ export default function CameraScreen({navigation}) {
                             console.log(photo);
                             // global.tempImage = photo.uri;
                             dispatch(setImageUri(photo.uri));
-                            navigation.navigate(
-                                (lastScreen === "AddAdvertisementScreen") ?
-                                    navigation.navigate("AddAdvertisementScreen")
-                                    : navigation.navigate("Update Advertisement Form")
-                            );
+                            navigation.goBack();
                         }
                     }} style={styles.capture}>
                         <Text style={{ fontSize: 14 }}> SNAP </Text>
